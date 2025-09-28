@@ -57,6 +57,49 @@ def get_law_id_by_title(law_title: str):
 
     return results
 
+def get_law_info(law_id: str):
+    """
+    e-Gov法令API Version 2 を使用して、法令IDから法令情報を取得します。
+    APIは部分一致検索を行うため、複数の結果が返される可能性があります。
+    Args:
+        law_id (str): 取得したい法令の法令ID
+
+    Returns:
+        dict: 法令IDに対応する法令情報
+              見つからない場合やエラー時は空のリストを返します。
+    """
+    # APIに渡すパラメータ
+    # law_id: 法令id
+    # response_format: レスポンス形式をJSONに指定
+    endpoint = f"{BASE_URL}/laws"
+    params = {
+        "law_id": law_id,
+        "response_format": "json"
+    }
+
+    result = {}
+    try:
+        # HTTP GETリクエストを送信
+        response = requests.get(endpoint, params=params)
+        response.raise_for_status()  # 200番台以外のステータスコードの場合、例外を発生させる
+
+        # レスポンスをJSONとしてパース
+        data = response.json()
+
+        # 'laws'キーに法令情報のリストが含まれている
+        if "laws" in data and data["laws"] and 0 < len(data["laws"]) and "law_info" in data["laws"][0]:
+            result = data["laws"][0]
+        else:
+            return {}
+
+    except requests.exceptions.RequestException as e:
+        print(f"APIリクエスト中にエラーが発生しました: {e}")
+        # エラーレスポンスの内容を表示
+        if 'response' in locals() and response.text:
+            print(f"エラーレスポンス: {response.text}")
+
+    return result
+
 def get_law_data(law_id: str, elm: str) -> dict:
     """
     法令本文取得API(/law_data)を呼び出し、法令本文のJSONデータを取得する。
