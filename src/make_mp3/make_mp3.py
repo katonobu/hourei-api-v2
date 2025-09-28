@@ -20,7 +20,6 @@ class MakeMp3():
             self.engine = pyttsx3.init()
         else:
             self.engine = None
-            print("MakeMp3() is initialized with dry_ryn mode.")
 
     def mp3_tts(self, file_path_name, texts, track_num=0, title_str="", artist_name_str="", album_name_str="", rate=200, additional_texts_objs = None):
         if file_path_name.endswith(".mp3") == False:
@@ -29,7 +28,7 @@ class MakeMp3():
             os.makedirs(os.path.dirname(file_path_name), exist_ok=True)
         if self.dry_run == False:
             with tempfile.TemporaryDirectory() as td:
-                print(f'  Generating {title_str}')
+#                print(f'  Generating {title_str}')
 
                 wav_file = os.path.join(td, "tmp.wav")
                 self.engine.setProperty('rate', rate)
@@ -92,7 +91,7 @@ class MakeMp3():
 
     
     def finish(self):
-        print("Finish MakeMp3().")
+#        print("Finish MakeMp3().")
         if self.dry_run == False:
             self.engine.stop()
             self.engine = None
