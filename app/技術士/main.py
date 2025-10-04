@@ -23,7 +23,7 @@ law_objs = [
     "law_title": "不正競争防止法",
     "law_id": "405AC0000000047",
     "article_numbers": [
-      [1],[2]
+      [1]
     ],
     "texts": []
   },
