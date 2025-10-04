@@ -37,6 +37,23 @@ law_objs = [
     "texts": []
   },
   {
+    "law_title": "特定商取引に関する法律",
+    "law_id": "351AC0000000057",
+    "article_numbers": [
+      [1], [2], 
+    ],
+    "texts": []
+  },
+  {
+    "law_title": "預託等取引に関する法律",
+    "law_id": "361AC0000000062",
+    "article_numbers": [
+      [1], [2], 
+      [9] # 勧誘等の禁止等
+    ],
+    "texts": []
+  },
+  {
     "law_title": "電子消費者契約に関する民法の特例に関する法律",
     "law_id": "413AC0000000095",
     "article_numbers": [
@@ -47,6 +64,26 @@ law_objs = [
   {
     "law_title": "消費者安全法",
     "law_id": "421AC0000000050",
+    "article_numbers": [
+      [1], [3], 
+      [10] # 消費生活センターの設置等
+    ],
+    "texts": []
+  },
+  {
+    "law_title": "消費者契約法",
+    "law_id": "412AC0000000061",
+    "article_numbers": [
+      [1], [2], [3], 
+      [4], [7],  # 消費者契約の申込み又はその承諾の意思表示の取消し
+      [8], [8,2], [8,3], [9], [10], # 消費者契約の条項の無効
+      [12], [12,2] # 差止請求権等
+    ],
+    "texts": []
+  },
+  {
+    "law_title": "消費者の財産的被害等の集団的な回復のための民事の裁判手続の特例に関する法律",
+    "law_id": "425AC0000000096",
     "article_numbers": [
       [1], [3]
     ],
@@ -71,7 +108,7 @@ def main():
   base_dir = os.path.join(os.path.dirname(__file__),"mp3_output", artist)
   os.makedirs(base_dir, exist_ok=True)
 
-  convert_to_mp3(base_dir, artist, law_objs, album_count=1, dry_run=dry_run)
+  convert_to_mp3(base_dir, artist, law_objs, album_count=1, dry_run=dry_run, normal_rate=280)
 
 if __name__ == "__main__":
   main()
