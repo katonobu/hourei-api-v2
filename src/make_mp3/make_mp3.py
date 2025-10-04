@@ -2,13 +2,13 @@ import os
 import tempfile
 try:
     import pyttsx3
+    from pydub import AudioSegment
+    from mutagen.mp3 import MP3
+    from mutagen.id3 import ID3, TIT2, TPE1, TALB, TRCK
 except ModuleNotFoundError as e:
     pyttsx3 = None
     print('pyttsx3 module is not found. MakeMp3() will be in dry_run mode.')
 
-from pydub import AudioSegment
-from mutagen.mp3 import MP3
-from mutagen.id3 import ID3, TIT2, TPE1, TALB, TRCK
 
 class MakeMp3():
     def __init__(self):
