@@ -13,6 +13,33 @@ law_objs = [
     "texts": []
   },
   {
+    "law_title": "金融商品取引法",
+    "law_id": "323AC0000000025",
+    "article_numbers": [
+      [1], 
+      [38] # 禁止行為
+    ],
+    "texts": []
+  },
+  {
+    "law_title": "宅地建物取引業法",
+    "law_id": "327AC1000000176",
+    "article_numbers": [
+      [1], 
+      [47],[47,2] # 禁止行為
+    ],
+    "texts": []
+  },
+  {
+    "law_title": "旅行業法",
+    "law_id": "327AC0100000239",
+    "article_numbers": [
+      [1], 
+      [13] # 禁止行為
+    ],
+    "texts": []
+  },
+  {
     "law_title": "家庭用品品質表示法",
     "law_id": "337AC0000000104",
     "article_numbers": [
