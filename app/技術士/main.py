@@ -46,7 +46,7 @@ def main():
   base_dir = os.path.join(os.path.dirname(__file__),"mp3_output", artist)
   os.makedirs(base_dir, exist_ok=True)
 
-  convert_to_mp3(base_dir, artist, law_objs, album_count=1, dry_run=dry_run)
+  convert_to_mp3(base_dir, artist, law_objs, album_count=1, dry_run=dry_run, normal_rate=280)
 
 if __name__ == "__main__":
   main()
