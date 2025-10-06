@@ -206,13 +206,14 @@ sdg_obj = {
     ]
 }
 
-def convert_to_mp3(base_dir, artist, album_count=1, dry_run = False):
+def convert_to_mp3(base_dir, artist, album_count=1, dry_run = False, normal_rate=280):
     title_str = "sdgs"
 
     mk_mp3 = MakeMp3()
 
     for goal_idx, goal in enumerate(sdg_obj["goals"], start=1):
         album_name = goal["title"]
+        zp_album_name = f'{int(goal["title"].split(" ")[0], 10):02d}_{goal["title"].split(" ")[1]}'
         album_dir = os.path.join(base_dir, album_name)
         os.makedirs(album_dir, exist_ok=True)
 
@@ -223,12 +224,12 @@ def convert_to_mp3(base_dir, artist, album_count=1, dry_run = False):
             mk_mp3.init(dry_run=dry_run)
             mk_mp3.mp3_tts(
                 os.path.join(album_dir, f'{track_num:02d}_{title_str}.mp3'), 
-                ['\n'.join(item.split())],
+                ['\n'.join([goal["title"]] + item.split())],
                 track_num=track_num,
                 title_str=f'{track_title[:16]}',
                 artist_name_str=artist,
-                album_name_str=album_name,
-                rate=300
+                album_name_str=zp_album_name,
+                rate=normal_rate
             )
             mk_mp3.finish()
             track_num += 1
@@ -241,7 +242,7 @@ def main():
 
     base_dir = os.path.join(os.path.dirname(__file__), 'mp3_output')
     artist = "SDG"
-    convert_to_mp3(base_dir, artist, dry_run=dry_run)
+    convert_to_mp3(base_dir, artist, dry_run=dry_run, normal_rate=280)
 
 if __name__ == "__main__":
     main()
