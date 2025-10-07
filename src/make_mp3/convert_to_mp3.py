@@ -24,7 +24,7 @@ def convert_to_mp3(base_dir, artist, law_objs, album_count=1, dry_run=False, slo
 
     for law_obj in law_objs:
         album_name = f'{artist[:2]}…{album_count:02d} {law_obj["law_title"]}'
-        album_dir = os.path.join(base_dir, album_name)
+        album_dir = os.path.join(base_dir, f'{album_count:02d}_{law_obj["law_title"]}')
         track_num = 1
         mk_mp3.init(dry_run=dry_run)
         mk_mp3.mp3_tts(
