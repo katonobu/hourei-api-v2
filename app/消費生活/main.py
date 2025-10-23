@@ -41,6 +41,7 @@ law_objs = [
     "law_id": "351AC0000000057",
     "article_numbers": [
       [1], [2], 
+      [3], [3,2], [4]
     ],
     "texts": []
   },
