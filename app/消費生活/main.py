@@ -88,18 +88,6 @@ law_objs = [
     "article_numbers": [
       # 総則
       [1], [2], 
-      # 基本理念
-      [3], [4],
-      [5], [6], [7], [8],
-      [9], [10], [11], [12],
-      # 施策の策定に係る基本方針
-      [20], [21], [22], [23],
-      [24], [25], [26], [27],
-      [28], [29], [30], [31],
-      [32], [33], [34], [35],
-      [36], [37], 
-      # デジタル社会の形成に関する重点計画
-      [39]
     ],
     "texts": []
   }
@@ -109,7 +97,7 @@ def main():
   dry_run = True
   dry_run = False
 
-  artist = "消費生活"
+  artist = "消費生活2次"
 
   base_dir = os.path.join(os.path.dirname(__file__),"mp3_output", artist)
   os.makedirs(base_dir, exist_ok=True)
