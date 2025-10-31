@@ -16,10 +16,6 @@ class MakeMp3():
 
     def init(self, dry_run = False):
         self.dry_run = pyttsx3 is None or dry_run == True
-        if self.dry_run == False:
-            self.engine = pyttsx3.init()
-        else:
-            self.engine = None
 
     def mp3_tts(self, file_path_name, texts, track_num=0, title_str="", artist_name_str="", album_name_str="", rate=200, additional_texts_objs = None):
         if file_path_name.endswith(".mp3") == False:
@@ -31,11 +27,14 @@ class MakeMp3():
 #                print(f'  Generating {title_str}')
 
                 wav_file = os.path.join(td, "tmp.wav")
+                self.engine = pyttsx3.init()
                 self.engine.setProperty('rate', rate)
                 self.engine.save_to_file("\n".join(texts), wav_file)
                 self.engine.runAndWait()
                 text_audio = AudioSegment.from_mp3(wav_file)
                 combined = text_audio
+                self.engine.stop()
+                self.engine = None
                 os.remove(wav_file)
 
 
@@ -48,11 +47,14 @@ class MakeMp3():
                         combined += mute_data
 
                         wav_file = os.path.join(td, f'tmp_{idx}.wav')
+                        self.engine = pyttsx3.init()
                         self.engine.setProperty('rate', rate)
                         self.engine.save_to_file("\n".join(additional_texts), wav_file)
                         self.engine.runAndWait()
                         text_audio = AudioSegment.from_mp3(wav_file)
                         combined += text_audio
+                        self.engine.stop()
+                        self.engine = None                        
                         os.remove(wav_file)
 
                 combined.export(file_path_name, format='mp3')
@@ -93,8 +95,9 @@ class MakeMp3():
     def finish(self):
 #        print("Finish MakeMp3().")
         if self.dry_run == False:
-            self.engine.stop()
-            self.engine = None
+            if self.engine is not None:
+                self.engine.stop()
+                self.engine = None
 
 
 if __name__ == "__main__":
