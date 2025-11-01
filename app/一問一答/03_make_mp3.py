@@ -66,7 +66,7 @@ def main():
             target_objs.append({
                 "title":law_obj["law"],
                 "sentences":sentences,
-                "rate":rate
+                "rate":200
             })
             for idx, q_and_a in enumerate(law_obj["q_and_as"], start = 1):
                 title = f'{law_obj["law"]} 問題 {idx}'
