@@ -54,8 +54,8 @@ def main():
     album_count = 1
     for sub_cat in sub_cats:
         print(sub_cat)
-        output_path_name = os.path.join(os.path.dirname(__file__),f'一問一答_民法_{sub_cat}.json')
-        with open(output_path_name, "r", encoding="utf-8") as f:
+        input_path_name = os.path.join(os.path.dirname(__file__),f'一問一答_民法_{sub_cat}.json')
+        with open(input_path_name, "r", encoding="utf-8") as f:
             law_key_q_and_as = json.load(f)
 
         target_objs = []
@@ -70,8 +70,7 @@ def main():
             })
             for idx, q_and_a in enumerate(law_obj["q_and_as"], start = 1):
                 title = f'{law_obj["law"]} 問題 {idx}'
-                sentences = [title]
-                sentences += q_and_a["question"]
+                sentences = [title, q_and_a["question"]]
                 ato = {"texts":[q_and_a["seigo"]],"mute_msec":mute_msec}
                 target_objs.append({
                     "title":title,
