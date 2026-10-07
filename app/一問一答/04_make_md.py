@@ -27,12 +27,10 @@ def main():
         with open(output_path_name, "r", encoding="utf-8") as f:
             law_key_q_and_as = json.load(f)
 
-        jb_and_q = []
-        q_a_and_exp = []
+        output_strs = []
         for law_obj in law_key_q_and_as:
-            jb_and_q.append(f'# {law_obj["law"]}')
-            jb_and_q.append(f'## 条文')
-            q_a_and_exp.append(f'# {law_obj["law"]}')
+            output_strs.append(f'# {law_obj["law"]}')
+            output_strs.append(f'## {law_obj["law"]} 条文')
             indent = 0
             for text in law_obj["law_texts"]:
                 additional_indent = 0
@@ -46,27 +44,17 @@ def main():
                 else:
                     additional_indent = 2
                 head_space = " "*(indent + additional_indent)
-                jb_and_q.append(f'{head_space}- {text}')
+                output_strs.append(f'{head_space}- {text}')
             for idx, q_and_a in enumerate(law_obj["q_and_as"], start = 1):
-                jb_and_q.append(f'## 問題 {idx}')
-                jb_and_q.append(f'{q_and_a["question"]}')
-
-                q_a_and_exp.append(f'## 問題 {idx}')
-                q_a_and_exp.append(f'{q_and_a["question"]}')
-                q_a_and_exp.append(f'## 回答 {idx}')
-                q_a_and_exp.append(f'{q_and_a["seigo"]}')
-                q_a_and_exp.append(f'## 解説 {idx}')
-                q_a_and_exp.extend(q_and_a["exp"].split("\n"))
+                output_strs.append(f'## {law_obj["law"]} 問題 {idx}')
+                output_strs.append(f'{q_and_a["question"]}')
+                output_strs.append(f'## {law_obj["law"]} 解説 {idx}')
+                output_strs.extend(q_and_a["exp"].split("\n"))
 
 
-        output_path_name = os.path.join(base_dir,f'一問一答_民法_{sub_cat}_条文_問題.md')
+        output_path_name = os.path.join(base_dir,f'一問一答_民法_{sub_cat}.md')
         with open(output_path_name, "w", encoding="utf-8") as f:
-            f.write("\n".join(jb_and_q))
-
-        output_path_name = os.path.join(base_dir,f'一問一答_民法_{sub_cat}_問題_回答_解説.md')
-        with open(output_path_name, "w", encoding="utf-8") as f:
-            f.write("\n".join(q_a_and_exp))
-
+            f.write("\n".join(output_strs))
 
 if __name__ == "__main__":
     main()

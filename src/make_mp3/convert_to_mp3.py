@@ -54,3 +54,38 @@ def convert_to_mp3(base_dir, artist, law_objs, album_count=1, dry_run=False, slo
             track_num += 1
         album_count += 1
     return album_count
+
+def convert_to_mp3_2(base_dir, artist, law_objs, album_count=1, dry_run=False, slow_rate=200, normal_rate=300):
+    mk_mp3 = MakeMp3()
+
+    for law_obj in law_objs:
+        album_name = f'{artist[:2]}…{album_count:02d} {law_obj["title"]}'
+        album_dir = os.path.join(base_dir, f'{album_count:02d}_{law_obj["title"]}')
+        track_num = 1
+        mk_mp3.init(dry_run=dry_run)
+        mk_mp3.mp3_tts(
+            os.path.join(album_dir, f'{track_num:02d}_law_name.mp3'), 
+            [law_obj["title"]],
+            track_num=track_num,
+            title_str=law_obj["title"],
+            artist_name_str=artist,
+            album_name_str=album_name,
+            rate=slow_rate
+        )
+        mk_mp3.finish()
+        track_num += 1
+        for texts in law_obj["texts"]:
+            mk_mp3.init(dry_run=dry_run)
+            mk_mp3.mp3_tts(
+                os.path.join(album_dir, f'{track_num:02d}.mp3'), 
+                [texts],
+                track_num=track_num,
+                title_str=f'{law_obj["title"]}_{track_num}',
+                artist_name_str=artist,
+                album_name_str=album_name,
+                rate=normal_rate
+            )
+            mk_mp3.finish()
+            track_num += 1
+        album_count += 1
+    return album_count

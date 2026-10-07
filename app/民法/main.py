@@ -94,10 +94,11 @@ def main():
         output_obj
       )
       law_obj["article_numbers"] = output_obj["at_nums"]
-#      print(json.dumps(law_obj, ensure_ascii=False, indent=2))
+      with open(os.path.join(base_dir, "..","..", f"articles_{album_count}.json"), "w", encoding="utf-8") as f:
+        json.dump(law_obj, f, ensure_ascii=False, indent=2)
 
 #      convert_to_mp3(base_dir, artist, [law_obj], album_count=album_count, dry_run=dry_run, normal_rate=280)
-      convert_to_mp3(base_dir, artist, [law_obj], album_count=album_count, dry_run=dry_run, normal_rate=200)
+#      convert_to_mp3(base_dir, artist, [law_obj], album_count=album_count, dry_run=dry_run, normal_rate=200)
 
 
 if __name__ == "__main__":
