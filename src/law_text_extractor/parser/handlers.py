@@ -97,7 +97,7 @@ def handle_item(node, children_content, context, handlers):
     item_title = get_item_title([node])
     for c in node.get('children', []):
         if isinstance(c, dict) and c.get('tag') == 'ItemSentence':
-            sentence = _process_children(node, context, handlers).replace(item_title, "").strip()
+            sentence = _process_children(node, context, handlers).strip()
     return f"\n第{para_title}項 第{item_title}号 \n{sentence}"
 
 def handle_paragraph_num(node, children_content, context, handlers):
